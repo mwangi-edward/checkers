@@ -9,14 +9,14 @@ class Board:
     ----------
         board : list
             board number of squares on the board
-        red_kings : int
-            number of red king pieces
+        BROWN_kings : int
+            number of BROWN king pieces
         white_kings : int
             number of white king pieces
         white_left : int
             number of white pieces on the board
-        red_left : int
-            number of red pieces on the board
+        BROWN_left : int
+            number of BROWN pieces on the board
     """
     def __init__(self):
         """Assigns values to the parameters and Creates the board.
@@ -25,9 +25,8 @@ class Board:
             None       
         """
         self.board =[]
-        self.selected_piece = None
-        self.red_left = self.white_left = 12
-        self.red_kings = self.white_kigs = 0
+        self.brown_left = self.white_left = 12
+        self.brown_kings = self.white_kings = 0
         self.create_board()
 
     def draw_squares(self,win):
@@ -46,6 +45,20 @@ class Board:
         for row in range(ROWS):
             for col in range(row % 2, COLS, 2):
                 pygame.draw.rect(win, WHITE,(row*SQUARE_SIZE, col*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE) )
+    
+    def move(self, piece, row, col):
+        self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
+        piece.move(row,col)
+        if row == ROWS or row == 0:
+            piece.make_king()
+            if piece.color == WHITE:
+                self.white_kings += 1
+            else:
+                self.brown_kings +=1
+
+    def get_piece(self, row, col):
+        return self.board[row][col]
+
     def create_board(self):
         """
         Creates the board as per the attributes assigned
@@ -75,6 +88,6 @@ class Board:
         self.draw_squares(win)
         for row in range(ROWS):
             for col in range(COLS):
-                piece= self.board[row][col]
+                piece = self.board[row][col]
                 if piece != 0:
                     piece.draw(win)

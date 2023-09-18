@@ -1,5 +1,5 @@
 import pygame
-from .constants import RED,GREY, SQUARE_SIZE
+from .constants import GREY, SQUARE_SIZE, CROWN, BROWN
 class Piece:
     """
     A Class to draw pieces, assign piece positions and assign kings.
@@ -43,7 +43,7 @@ class Piece:
         self.x_axis = 0
         self.y_axis = 0
         self.calc_pos()
-        if self.color == RED:
+        if self.color == BROWN:
             self.direction = -1
         else:
             self.direction = 1
@@ -73,6 +73,13 @@ class Piece:
         radius = SQUARE_SIZE//2 - self.PADDING
         pygame.draw.circle(win, GREY, (self.x_axis,self.y_axis), radius + self.OUTLINE)
         pygame.draw.circle(win, self.color, (self.x_axis,self.y_axis), radius)
+        if self.king:
+            win.blit(CROWN,(self.x_axis - CROWN.get_width()//2, self.y_axis - CROWN.get_height() * 0.5 ))
+    
+    def move(self, row, col):
+        self.row = row
+        self.col = col
+        self.calc_pos()
     
     def __repr__(self) -> str:
         return f'position = {(self.x_axis,self.y_axis)}\n'
