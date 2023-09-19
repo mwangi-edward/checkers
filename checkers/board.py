@@ -91,3 +91,25 @@ class Board:
                 piece = self.board[row][col]
                 if piece != 0:
                     piece.draw(win)
+    
+    def get_valid_moves(self, piece):
+        moves={}
+        left = piece.col - 1
+        right = piece.col + 1
+        row = piece.row
+
+        if piece.color == BROWN or piece.king:
+            pass
+
+        if piece.color == WHITE or piece.king:
+            pass
+
+    def _traverse_left(self, start, stop, step, color, left, skipped=[]):
+        moves = {}
+        last=[]
+        for r in range(start, stop, step):
+            if left < 0:
+                break
+    
+    def _traverse_right(self, start, stop, step, color, right, skipped=[]):
+        pass

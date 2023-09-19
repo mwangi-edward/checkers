@@ -43,10 +43,7 @@ class Piece:
         self.x_axis = 0
         self.y_axis = 0
         self.calc_pos()
-        if self.color == BROWN:
-            self.direction = -1
-        else:
-            self.direction = 1
+
 
     def calc_pos(self):
         """
