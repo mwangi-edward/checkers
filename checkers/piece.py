@@ -71,6 +71,7 @@ class Piece:
         pygame.draw.circle(win, GREY, (self.x_axis,self.y_axis), radius + self.OUTLINE)
         pygame.draw.circle(win, self.color, (self.x_axis,self.y_axis), radius)
         if self.king:
+            # to do the 0.5 below might need changing
             win.blit(CROWN,(self.x_axis - CROWN.get_width()//2, self.y_axis - CROWN.get_height() * 0.5 ))
     
     def move(self, row, col):
